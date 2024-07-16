@@ -136,7 +136,7 @@ Netty 提供了很多原生的编码器和解码器，可以帮助我们方便�
 MessageToByteEncoder 的功能是将一个 Java POJO 对象编码成一个 ByteBuf 数据包。它是一个抽象类，仅仅实现了编码的基础流程，由子类负责实现具体的 encode 编码方法：
 
 ```
-// MessageToByteEncoder.java
+    // MessageToByteEncoder.java
     
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
         ByteBuf buf = null;
@@ -183,7 +183,7 @@ MessageToByteEncoder 的功能是将一个 Java POJO 对象编码成一个 ByteB
 来看一个示例——StringToByteEncoder，对字符串类型的数据进行编码：
 
 ```
-// StringToByteEncoder.java
+    // StringToByteEncoder.java
     
     public class StringToByteEncoder extends MessageToByteEncoder<String> {
             @Override
@@ -201,7 +201,7 @@ MessageToByteEncoder 的功能是将一个 Java POJO 对象编码成一个 ByteB
 MessageToMessageEncoder 的功能是将某一种 POJO 对象编码成另外一种的 POJO 对象。它同样是一个抽象类，仅仅实现了编码的基础流程，由子类负责实现具体的 encode 编码方法：
 
 ```
-// MessageToMessageEncoder.java
+    // MessageToMessageEncoder.java
     
     @Override
     public void write(ChannelHandlerContext ctx, Object msg, ChannelPromise promise) throws Exception {
@@ -236,7 +236,7 @@ MessageToMessageEncoder 的功能是将某一种 POJO 对象编码成另外一�
 注意，子类在实现 encode 方法时，编码完成后，需要将编码后的结果对象加入到 encode 方法中的 List 入参中。下面是一个将 String 转换成 Integer 的 Encoder 编码器示例：
 
 ```
-public class String2IntegerEncoder extends MessageToMessageEncoder<String> {
+    public class String2IntegerEncoder extends MessageToMessageEncoder<String> {
         @Override
         protected void encode(ChannelHandlerContext ctx, String s, List<Object> list) throws Exception {
             char[] array = s.toCharArray();
@@ -270,7 +270,7 @@ Netty 常用的解码器类型有两类：
 ByteToMessageDecoder 是一个非常重要的解码器抽象类，实现了解码的基础逻辑和流程，它仅仅将子类的 decode 方法解码之后的 Object 结果，放入自己内部的结果列表`List<Object>`中，最终，父类会负责将`List<Object>`中的元素，一个个地传递给下一个站：
 
 ```
-// ByteToMessageDecoder.java
+    // ByteToMessageDecoder.java
     
     public abstract class ByteToMessageDecoder extends ChannelInboundHandlerAdapter {
     
@@ -293,7 +293,7 @@ ByteToMessageDecoder 是一个非常重要的解码器抽象类，实现了解�
 来看一个示例——ByteToIntegerDecoder，将字节类型的数据编码成 Integer：
 
 ```
-// ByteToIntegerDecoder.java
+    // ByteToIntegerDecoder.java
     
     public class ByteToIntegerDecoder extends ByteToMessageDecoder {
         @Override
@@ -314,7 +314,7 @@ ByteToMessageDecoder 是一个非常重要的解码器抽象类，实现了解�
 MessageToMessageEncoder 的功能是将某一种 POJO 对象解码成另外一种的 POJO 对象。它同样是一个抽象类，仅仅实现了解码的基础流程，由子类负责实现具体的 decode 编码方法：
 
 ```
-// MessageToMessageDecoder.java
+    // MessageToMessageDecoder.java
     
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -351,7 +351,7 @@ MessageToMessageEncoder 的功能是将某一种 POJO 对象解码成另外一�
 我们来通过一个示例理解下，Integer2StringDecoder 类用于将 Integer 类型的输入转化成 String 类型：
 
 ```
-// Integer2StringDecoder.java
+    // Integer2StringDecoder.java
     
     public class Integer2StringDecoder extends MessageToMessageDecoder<Integer> {
         @Override
@@ -372,7 +372,7 @@ Netty 提供了不少开箱即用的 Decoder 解码器，这些解码器基本�
 **特点：** 固定长度解码器，无论接收方一次获取多大的数据，都会严格按照 frameLength 进行解码，即当解码器累积读取到长度大小为 frameLength 的消息，就认为已经获取到了一个完整的消息。如果消息长度小于 frameLength，该解码器会一直等待后续数据包的到达，直至获得完整的消息。
 
 ```
-// FixedLengthFrameDecoder.java
+    // FixedLengthFrameDecoder.java
     
     public class FixedLengthFrameDecoder extends ByteToMessageDecoder {
         // 固定字节的长度
@@ -388,7 +388,7 @@ Netty 提供了不少开箱即用的 Decoder 解码器，这些解码器基本�
 下面，我们通过一个例子来感受一下。首先是 Server 端，我定义了两个 ChannelHandler：`FixedLengthFrameDecoder`和`EchoServerHandler`，FixedLengthFrameDecoder 负责按定长的方式解码字节流（构造函数传入`frameLength = 10`），然后将结果转发给下一站 EchoServerHandler，EchoServerHandler 只负责打印结果：
 
 ```
-public class FixedLengthFrameDemo {
+    public class FixedLengthFrameDemo {
     
         static class EchoServerHandler extends ChannelInboundHandlerAdapter {
             @Override
@@ -433,7 +433,7 @@ public class FixedLengthFrameDemo {
 启动服务端后，我们通过`telnet`命令连接上去，执行以下命令：
 
 ```
-Microsoft Telnet> send hello, Miss xiaoyu?
+    Microsoft Telnet> send hello, Miss xiaoyu?
     发送字符串 hello, Miss xiaoyu?
     Microsoft Telnet> send How are you
     发送字符串 How are you
@@ -443,7 +443,7 @@ Microsoft Telnet> send hello, Miss xiaoyu?
 服务端收到的结果如下，可以看到，服务端是按 10 个字节的固定长度依次解析的：
 
 ```
-received string: [hello, Mis]
+    received string: [hello, Mis]
     received string: [s xiaoyu?H]
     received string: [ow are you]
 ```
@@ -453,7 +453,7 @@ received string: [hello, Mis]
 **特点：** 特殊分隔符解码器，基于自定义的分隔符（比如回车 / 换行）作为数据包的边界分割符。 无论接收方一次获取多大的数据，都会严格按照分隔符进行解码。
 
 ```
-// DelimiterBasedFrameDecoder.java
+    // DelimiterBasedFrameDecoder.java
     
         public DelimiterBasedFrameDecoder(int maxFrameLength, boolean stripDelimiter, 
                                           boolean failFast, ByteBuf... delimiters) {
@@ -485,7 +485,7 @@ DelimiterBasedFrameDecoder 的构造函数，有几个属性需要了解以下�
 下面，我们通过一个例子来感受一下：
 
 ```
-public class DelimiterBasedFrameDemo {
+    public class DelimiterBasedFrameDemo {
         static class EchoServerHandler extends ChannelInboundHandlerAdapter {
             @Override
             public void channelRead(ChannelHandlerContext ctx, Object msg) throws Exception {
@@ -531,14 +531,14 @@ public class DelimiterBasedFrameDemo {
 启动服务端后，我们通过`telnet`命令连接上去，执行以下命令：
 
 ```
-Microsoft Telnet> send hi$$Miss$$Xiao$$
+    Microsoft Telnet> send hi$$Miss$$Xiao$$
     发送字符串 hi$$Miss$$Xiao$$
 ```
 
 服务端收到的结果如下，可以看到，服务端是按`$$`分隔符依次解析的：
 
 ```
-received string: [hi]
+    received string: [hi]
     received string: [Miss]
     received string: [Xiao]
 ```
