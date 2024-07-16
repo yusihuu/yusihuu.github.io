@@ -42,7 +42,7 @@ Netty 既然是一个网络通信框架，就必然涉及编解码技术：
 
 我们再通过一个示例理解下拆包和粘包：
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/拆包-粘包.png)
+![](/img/network-program/netty/拆包-粘包.png)
 
 上图中，演示了五种拆包 / 粘包的情况：
 
