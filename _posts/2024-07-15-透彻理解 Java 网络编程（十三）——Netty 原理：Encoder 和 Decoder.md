@@ -35,7 +35,7 @@ Netty 既然是一个网络通信框架，就必然涉及编解码技术：
 *   如果一次传输的网络包数据大小超过了 MTU 传输单元大小，那么数据可能会拆分为多个数据包发送出去；
 *   如果每次请求的网络包数据都很小，TCP 会采用的 Nagle 算法进行优化，本质就是先缓存再批量发送。
 
-![](/img/in-post/post-nextgen-web-pwa/PWAR-007.jpeg)
+![](/img/network-program/netty/网络传输数据包.png)
 
 > Linux 在默认情况下是开启 Nagle 算法的，在大量小数据包的场景下可以有效地降低网络开销。可以通过 Linux 提供的 `TCP_NODELAY`参数禁用 Nagle 算法。
 
@@ -129,7 +129,7 @@ Netty 提供了很多原生的编码器和解码器，可以帮助我们方便�
 
 编码器是一个 Outbound 出站处理器，对应接口为`ChannelOutboundHandler`：
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/Encoder编码器.png)
+![](/img/network-program/netty/Encoder编码器.png)
 
 ### 2.1 MessageToByteEncoder
 
@@ -263,7 +263,7 @@ Netty 常用的解码器类型有两类：
 
 解码器是一个 Inbound 入站处理器，对应接口为`ChannelInboundHandler`：
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/Decode解码器.png)
+![](/img/network-program/netty/Decode解码器.png)
 
 ### 3.1 ByteToMessageDecoder
 
@@ -588,7 +588,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 1：长度域只包含 Length 字段，长度域的值即 Length 字段的值
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器1.png)
+![](/img/network-program/netty/长度域解码器1.png)
 
 上述协议是最基本的格式，长度域内只包含一个 Length 字段（其值为消息体的大小）。所以，上述长度域的值`0x000C`代表消息体占用 12 字节。该协议对应的解码器参数组合如下：
 
@@ -599,7 +599,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 2：长度域只包含 Length 字段，长度域的值即 Length 字段的值，解码结果需要截断
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器2.png)
+![](/img/network-program/netty/长度域解码器2.png)
 
 示例 2 和示例 1 的区别在于，示例 2 解码后的结果只包含消息体的内容。该协议对应的解码器参数组合如下：
 
@@ -610,7 +610,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 3：长度域只包含 Length 字段，长度域的值为 Length 字段的值 + 消息内容所占的字节
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器3.png)
+![](/img/network-program/netty/长度域解码器3.png)
 
 示例 3 中，长度域的值为 0x000E（14 字节），这个值包含两部分：2 字节的 Length 字段，以及 12 字节的消息体大小。对应的解码器参数组合如下：
 
@@ -621,7 +621,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 4：长度域只包含 Length 字段，长度域的值即 Length 字段的值，长度域前面有其它字段
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器4.png)
+![](/img/network-program/netty/长度域解码器4.png)
 
 示例 4 中，Length 字段不再是报文的起始位置，Length 字段的值为`0x00000C`，表示消息体占 12 字节，该协议对应的解码器参数组合如下：
 
@@ -632,7 +632,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 5：长度域只包含 Length 字段，长度域的值即 Length 字段的值，长度域后面有其它字段
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器5.png)
+![](/img/network-program/netty/长度域解码器5.png)
 
 示例 5 中，Length 字段之后是 Header，Length 与 Content 字段不再相邻。该协议对应的解码器参数组合如下：
 
@@ -643,7 +643,7 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ##### 示例 6：长度域只包含 Length 字段，长度域的值即 Length 字段的值，长度域前后都有其它字段
 
-![](https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/长度域解码器6.png)
+![](/img/network-program/netty/长度域解码器6.png)
 
 示例 6 中，Length 字段前后都有 Header，Length 与 Content 字段不再相邻。该协议对应的解码器参数组合如下：
 
