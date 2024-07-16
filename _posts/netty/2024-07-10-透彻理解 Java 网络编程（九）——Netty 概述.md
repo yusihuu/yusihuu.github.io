@@ -4,6 +4,7 @@ title:      透彻理解 java 网络编程(九)
 subtitle:   netty 概述
 date:       2024-07-10
 author:     yusihu
+header-style: text
 catalog: true
 tags:
     - 网络编程
