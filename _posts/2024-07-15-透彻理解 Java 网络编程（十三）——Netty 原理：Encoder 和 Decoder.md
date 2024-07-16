@@ -35,8 +35,7 @@ Netty 既然是一个网络通信框架，就必然涉及编解码技术：
 *   如果一次传输的网络包数据大小超过了 MTU 传输单元大小，那么数据可能会拆分为多个数据包发送出去；
 *   如果每次请求的网络包数据都很小，TCP 会采用的 Nagle 算法进行优化，本质就是先缓存再批量发送。
 
-<img src='https://github.com/yusihuu/yusihuu.github.io/blob/master/img/network-program/netty/拆包-粘包.png' alt="拆包-粘包">
-![](http://upload-images.jianshu.io/upload_images/2178672-e65e5cda50f38cef.jpg?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240)
+![](/img/in-post/post-nextgen-web-pwa/PWAR-007.jpeg)
 
 > Linux 在默认情况下是开启 Nagle 算法的，在大量小数据包的场景下可以有效地降低网络开销。可以通过 Linux 提供的 `TCP_NODELAY`参数禁用 Nagle 算法。
 
