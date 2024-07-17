@@ -1,7 +1,7 @@
 ---
 layout:     post
-title:      透彻理解 java 网络编程(十三)
-subtitle:   netty 原理：encoder 和 decoder
+title:      透彻理解 java 网络编程(十四)
+subtitle:   netty 原理：ByteBuf缓冲区
 date:       2024-07-16
 author:     yusihu
 header-style: text
