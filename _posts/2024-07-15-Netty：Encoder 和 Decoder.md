@@ -4,7 +4,6 @@ title:      透彻理解 java 网络编程(十三)
 subtitle:   netty 原理：encoder 和 decoder
 date:       2024-07-15
 author:     yusihu
-header-img: img/post-bg-ios9-web.jpg
 catalog: true
 tags:
     - 网络编程
@@ -724,3 +723,11 @@ LengthFieldBasedFrameDecoder 的构造函数，有几个属性我需要重点讲
 
 ----
 转载自： [Ressmix](https://www.tpvlog.com/article/345)
+
+参考: 
+
+[变长协议](http://www.tianshouzhi.com/api/tutorials/netty/398)
+
+[拆包器之LengthFieldBasedFrameDecoder](https://www.cnblogs.com/java-chen-hao/p/11571229.html)
+
+
