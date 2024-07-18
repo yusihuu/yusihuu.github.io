@@ -1,8 +1,8 @@
 ---
 layout:     post
-title:      透彻理解 java 网络编程(十三)
-subtitle:   netty 原理：encoder 和 decoder
-date:       2024-07-16
+title:      透彻理解 java 网络编程(十五)
+subtitle:   netty 原理：内存管理机制
+date:       2024-07-17
 author:     yusihu
 header-style: text
 catalog: true
