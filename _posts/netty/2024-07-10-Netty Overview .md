@@ -12,7 +12,6 @@ tags:
     - 开源框架
 ---
 
-> 从本章开始，我将对 Netty 这个基于 JavaNIO 实现的开源网络通信框架进行讲解。Netty 在高性能网络编程中有着大量的应用，比如很多公司会基于 Netty 来实现 OA、消息网关、
 
 从本章开始，我将对 Netty 这个基于 Java NIO 实现的开源网络通信框架进行讲解。Netty 在高性能网络编程中有着大量的应用，比如很多公司会基于 Netty 来实现 OA、消息网关、云盘等涉及大量客户端并发访问的应用，一些开源中间件也将 Netty 作为底层的网络通讯组件，比如 RocketMQ、ElasticSearch、Dubbo、Hadoop 等。
 
