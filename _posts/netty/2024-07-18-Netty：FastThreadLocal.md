@@ -7,9 +7,9 @@ author:     yusihu
 header-style: text
 catalog: true
 tags:
-- 网络编程
-- netty
-- 开源框架
+    - 网络编程
+    - netty
+    - 开源框架
 ---
 
 本章，我将对 Netty 中的 FastThreadLocal 这个线程本地工具类进行讲解。我曾介绍过 JDK 中的 ThreadLocal，Netty 官方表示 FastThreadLocal 是比 JDK 的 ThreadLocal 性能更高。

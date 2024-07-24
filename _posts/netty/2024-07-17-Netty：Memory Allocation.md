@@ -7,9 +7,9 @@ author:     yusihu
 header-style: text
 catalog: true
 tags:
-- 网络编程
-- netty
-- 开源框架
+    - 网络编程
+    - netty
+    - 开源框架
 ---
 
 了解了 ByteBuf 的结构和基本使用，我们来看 Netty 是如何进行内存管理的。Netty 借鉴了 _**jemalloc 内存分配器**_ ，实现了一套高性能的内存管理机制：

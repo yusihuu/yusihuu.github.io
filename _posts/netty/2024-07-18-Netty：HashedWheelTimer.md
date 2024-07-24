@@ -7,9 +7,9 @@ author:     yusihu
 header-style: text
 catalog: true
 tags:
-- 网络编程
-- netty
-- 开源框架
+    - 网络编程
+    - netty
+    - 开源框架
 ---
 本章，我将对 Netty 中的 **HashedWheelTimer** 这个延迟任务处理器进行讲解。我曾经在[《透彻理解 Kafka》](https://www.tpvlog.com/article/278)系列中介绍过 Kafka 的时间轮算法，为了实现高性能的定时任务调度，Netty 也引入了时间轮算法驱动定时任务的执行。
 
