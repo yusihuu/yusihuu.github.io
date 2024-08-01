@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      透彻理解 java 网络编程(十九)
-subtitle:   netty 原理：Mpsc Queue 无锁队列
+subtitle:   Mpsc Queue 无锁队列
 date:       2024-07-19 14:00:00
 author:     yusihu
 header-style: text

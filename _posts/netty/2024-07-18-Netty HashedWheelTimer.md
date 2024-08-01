@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      透彻理解 java 网络编程(十八)
-subtitle:   netty 原理：HashedWheelTimer 时间轮
+subtitle:   HashedWheelTimer 时间轮
 date:       2024-07-18 18:00:00
 author:     yusihu
 header-style: text

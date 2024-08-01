@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      透彻理解 java 网络编程(十七)
-subtitle:   netty 原理：FastThreadLocal 线程本地变量
+subtitle:   FastThreadLocal 线程本地变量
 date:       2024-07-18 12:00:00
 author:     yusihu
 header-style: text

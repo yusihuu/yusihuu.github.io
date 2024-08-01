@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      透彻理解 java 网络编程(十三)
-subtitle:   netty 原理：encoder 和 decoder
+subtitle:   encoder 和 decoder
 date:       2024-07-15
 author:     yusihu
 catalog: true

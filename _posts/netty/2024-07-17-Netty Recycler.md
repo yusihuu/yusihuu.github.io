@@ -1,7 +1,7 @@
 ---
 layout:     post
 title:      透彻理解 java 网络编程(十六)
-subtitle:   netty 原理：Recycler 对象池
+subtitle:   Recycler 对象池
 date:       2024-07-17
 author:     yusihu
 header-style: text
