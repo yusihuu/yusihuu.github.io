@@ -43,7 +43,7 @@ tags:
 
 > 注意：由于 Netty 官方废弃了`Netty 5.X`版本，所以我这里使用`4.X`版本，该版本目前官方仍在持续维护。
 
-![](http://image.skjava.com/article/series/netty/202308022224283001.png)
+![](/img/network-program/netty/netty-demo.png)
 
 ### 1.1 服务端示例
 
@@ -218,7 +218,7 @@ NettyClient 的代码与 Server 端类似，区别就是使用了一个`Bootstra
 
 Bootstrap 类是 Netty 提供的一个便利工厂类，可以通过它来完成 Netty 客户端或服务端的组件组装，以及 Netty 程序的初始化。
 
-![](http://image.skjava.com/article/series/netty/202308022224297452.png)
+![](/img/network-program/netty/Bootstrap.png)
 
 *   **ServerBootstrap：** Netty 服务端的组件组装工厂类；
 *   **Bootstrap：** Netty 客户端的组件组装工厂类。
@@ -244,7 +244,7 @@ Netty 没有直接使用 Java NIO 的 Channel 通道，而是自己对 Channel �
 
 在 Netty 的 NioSocketChannel 内部封装了一个 Java NIO 的 SelectableChannel 成员。通过这个内部的 Java NIO 通道，Netty 的 NioSocketChannel 通道上的 IO 操作，最终会落地到 Java NIO 的 SelectableChannel 底层通道：
 
-![](http://image.skjava.com/article/series/netty/202308022224313143.png)
+![](/img/network-program/netty/Channel.png)
 
 在 Netty 中，将有接收关系的`NioServerSocketChannel`和`NioSocketChannel`，叫作 **父子通道** 。其中 NioServerSocketChannel 是服务端负责监听和接收客户端连接的，也叫父通道（Parent Channel）。对于每一个接收到的 NioSocketChannel 传输类通道，也叫子通道（Child Channel）。
 
@@ -273,7 +273,7 @@ Netty 没有直接使用 Java NIO 的 Channel 通道，而是自己对 Channel �
 *   入站：触发的方向为自底向上，即从底层 Channel 往 Hander 处理器，一般都继承`ChannelInboundHandler`入站处理器。当数据或者信息入站到 Netty 通道时，Netty 将触发 ChannelInboundHandler 对应的入站 API，进行入站操作处理；
 *   出站：触发的方向为自顶向下，即从 Hander 处理器往底层 Channel 通道，一般都继承`ChannelOutboundHandler`出站处理器。当业务处理完成后，需要操作 Java NIO 底层通道时，通过一系列的 ChannelOutboundHandler 出站处理器，完成 Netty 通道到底层通道的操作。
 
-![](http://image.skjava.com/article/series/netty/202308022224331864.png)
+![](/img/network-program/netty/Handler.png)
 
 > ChannelInboundHandler 的默认实现为 ChannelInboundHandlerAdapter，叫作通道入站处理适配器。ChanneOutboundHandler 的默认实现为 ChanneloutBoundHandlerAdapter，叫作通道出站处理适配器。
 
@@ -286,7 +286,7 @@ Netty 的业务处理器流水线 **ChannelPipeline** 是基于责任链设计�
 
 请求在入站处理器中的流动次序是 **从前到后** ，在出站处理器中的流动次序是 **从后往前** 。
 
-![](http://image.skjava.com/article/series/netty/202308022224343125.png)
+![](/img/network-program/netty/ChannelPipeline.png)
 
 ### 2.5 ChannelHandlerContext
 
@@ -302,14 +302,14 @@ ChannelHandlerContext 中包含了有许多方法，主要可以分为两类：
 *   如果通过 Channel 或 ChannelPipeline 来调用，则会在整条流水线中传播；
 *   如果是通过 ChannelHandlerContext 来调用，则只会从当前的节点开始执行 Handler 业务处理器，并传播到同类型 Handler 的下一站。
 
-![](http://image.skjava.com/article/series/netty/202308022224374126.png)
+![](/img/network-program/netty/ChannelHandlerContext.png)
 
 所以，总结一下，Channel、Handler、ChannelHandlerContext 三者的关系为：
 
 1.  每个 Channel 通道拥有一条 ChannelPipeline 通道流水线，流水线节点为 ChannelHandlerContext 上下文对象，每一个 ChannelHandlerContext 中包裹了一个 ChannelHandler 处理器；
 2.  在 ChannelHandler 的入站 / 出站处理方法中，Netty 都会传递一个 ChannelHandlerContext 实例作为参数。在业务处理中，通过 ChannelHandlerContext 可以获取 ChannelPipeline 实例或者 Channel 实例。
 
-![](http://image.skjava.com/article/series/netty/202308022224386537.png)
+![](/img/network-program/netty/Channel_ChannelHandlerContext.png)
 
 ### 2.6 ByteBuf
 
@@ -326,7 +326,7 @@ ByteBuf 通过三个整型属性有效地区分可读数据和可写数据，使
 
 从逻辑上来讲，ByteBuf 内部可以分为四个部分，具体如下图所示：
 
-![](http://image.skjava.com/article/series/netty/202308022224395518.png)
+![](/img/network-program/netty/ByteBuf.png)
 
 *   废弃：表示已经使用完的废弃的无效字节；
 *   可读：ByteBuf 保存的有效数据，从 ByteBuf 中读取的数据都来自这一部分；
@@ -354,7 +354,7 @@ Netty 从底层的 Java 通道读取字节数据，传入 Netty 通道的流水�
 
 Netty 官网给出了有关 Netty 的整体功能模块结构，我们可以清晰地看出 Netty 的整体架构分为三个模块：
 
-![](http://image.skjava.com/article/series/netty/202308022224408289.png)
+![](/img/network-program/netty/Overview.png)
 
 #### Core 核心层
 
@@ -372,7 +372,7 @@ Core 核心层是 Netty 最精华的内容，它提供了底层网络通信的�
 
 我们再来看 Netty 的逻辑架构，可以看到 Netty 采用了典型的三层网络架构进行设计和开发：
 
-![](http://image.skjava.com/article/series/netty/2023080222244175610.png)
+![](/img/network-program/netty/logic-structure.png)
 
 #### 网络通信层
 
@@ -392,7 +392,7 @@ EventLoopGroup 本质是一个线程池，主要负责接收 I/O 请求，并分
 2.  EventLoop 同一时间会与一个线程绑定，每个 EventLoop 负责处理多个 Channel；
 3.  每新建一个 Channel，EventLoopGroup 会选择一个 EventLoop 与其绑定，该 Channel 在生命周期内都可以对 EventLoop 进行多次绑定和解绑。
 
-![](http://image.skjava.com/article/series/netty/2023080222244316711.png)
+![](/img/network-program/netty/EventLoopGroup-EventLoop-Channel.png)
 
 Netty 通过创建不同的 EventLoopGroup 参数配置，就可以支持 Reactor 的三种线程模型：
 
@@ -410,11 +410,11 @@ ChannelPipeline 是 Netty 的核心编排组件， **负责组装各种 ChannelH
 
 ChannelPipeline 本身是线程安全的，每一个 Channel 都会绑定一个新的 ChannelPipeline，一个 ChannelPipeline 关联一个 EventLoop，一个 EventLoop 仅会绑定一个线程：
 
-![](http://image.skjava.com/article/series/netty/2023080222244588512.png)
+![](/img/network-program/netty/Channel_ChannelHandlerContext.png)
 
 ChannelPipeline 中包含入站 ChannelInboundHandler 和出站 ChannelOutboundHandler 两种处理器，我们结合客户端和服务端的数据收发流程，来理解 Netty 的这两个概念：
 
-![](http://image.skjava.com/article/series/netty/2023080222244713813.png)
+![](/img/network-program/netty/ChannelPipeline-in-out.png)
 
 以客户端为例，数据从客户端发向服务端，该过程称为 **出站** ，反之则称为 **入站** 。数据入站会由一系列 InBoundHandler 处理，然后再以相反方向的 OutBoundHandler 处理后完成出站。我们经常使用的编码 Encoder 是出站操作，解码 Decoder 是入站操作。
 
@@ -428,7 +428,7 @@ ChannelPipeline 中包含入站 ChannelInboundHandler 和出站 ChannelOutboundH
 
 前面说了，Netty 采用了主从 Reactor 模式，服务端启动时，创建了两个`NioEventLoopGroup`，它们实际是两个独立的 Reactor 线程池，一个用于监听客户端的连接请求，并与客户端建立 TCP 连接；另一个用于处理 I/O 相关的读写操作或者执行系统 Task、定时任务 Task 等。
 
-![](http://image.skjava.com/article/series/netty/2023080222244816414.png)
+![](/img/network-program/netty/ReactorModel.png)
 
 上图是 Netty 服务端处理请求的流程：
 
@@ -443,6 +443,6 @@ ChannelPipeline 中包含入站 ChannelInboundHandler 和出站 ChannelOutboundH
 
 本章，我通过一个示例介绍了 Netty 的基本使用，并对 Netty 的整体架构，以及网络请求处理流程进行了讲解，基于这些内容，下一章开始我将分析 Netty 的源码（基于 Netty `4.1.65.Final` 版本），整个专栏讲解的思路遵循下面这张思维导读，供读者参考：
 
-![](http://image.skjava.com/article/series/netty/2023080222245004415.png)
+![](/img/network-program/netty/summarize.png)
 
 > 读者需要注意，早期的 Java 网络编程一般是基于`java.net.*`包中的 Socket 和 ServerSocket，本质属于同步阻塞 IO，这块内容我不会讲解，也是比较基础的内容，我推荐读者可以参考 [O'Reilly](https://book.douban.com/series/697) 的书籍《Java 网络编程》了解即可。
